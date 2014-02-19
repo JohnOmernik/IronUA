@@ -113,7 +113,7 @@ uarules = [
 # If enable Commonality is enabled, it makes the connection for use for checking UAs
 if enableCommonality == 1:
 	import pymongo
-	mongoserver = '172.21.250.17'
+	mongoserver = '%yourmongoserver%'
 	mongoport = 27017
 	mongo = pymongo.Connection(mongoserver, mongoport)
 	mongo_db = mongo['useragent']
