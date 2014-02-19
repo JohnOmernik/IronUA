@@ -113,7 +113,7 @@ uarules = [
 # If enable Commonality is enabled, it makes the connection for use for checking UAs
 if enableCommonality == 1:
 	import pymongo
-	mongoserver = '172.21.250.17'
+	mongoserver = '%yourmongo%'
 	mongoport = 27017
 	mongo = pymongo.Connection(mongoserver, mongoport)
 	mongo_db = mongo['useragent']
@@ -293,7 +293,6 @@ def prettyPrint(ua, day, tags):
 	infHead = 0
 	invHead = 0
 	print "\n--------------------\nUserAgent: %s\n" % ua
-	day = '2014-02-18'
 	common = howCommon(ua, day)
 	#common = {'status':'Not Found'}
 	if common['status'] == "Found":
