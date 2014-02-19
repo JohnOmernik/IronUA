@@ -16,18 +16,23 @@ import ironua
 Then for example:
 
 for useragent in useragents:
+
   tags = []
   
   #Get the Tags for your UA
+  
   tags = ironua.tagUserAgent(useragent)
   
   #Get the commonality (if enabled in your system and if you have the proper backend)
+  
   day = '2014-02-18' # The day you want to determine commonality on 
+  
   common = ironua.howCommon(useragent, day)
   
   #You can then use this info in your script. 
   
   # There is also a prettyPrint option (you still need to run the tags manually
+  
   # You do not need to run the howCommon function.  
   
   ironua.prettyPrint(useragent, day, tags)
