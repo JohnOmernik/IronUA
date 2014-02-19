@@ -17,6 +17,7 @@ tagrules = [
     {"rule":"'inf:new_opera' in tags and not ('inf:valid_safari' in tags or 'inf:valid_chrome' in tags or 'inf:valid_new_opera' in tags)", "tag":"inv:new_opera", "desc":"New Opera Token string but does not include valid Safari, Chrome, or Opera string"},
     {"rule":"'inf:chrome' in tags and not ('inf:valid_safari' in tags or 'inf:valid_chrome' in tags or 'inf:valid_new_opera' in tags)", "tag":"inv:chrome", "desc":"Chrome Token string but does not include valid Safari, Chrome, or Opera string"},
     {"rule":"'inf:safari' in tags and not ('inf:valid_safari' in tags or 'inf:valid_chrome' in tags or 'inf:valid_new_opera' in tags)", "tag":"inv:safari", "desc":"Safari Token string but does not include valid Safari, Chrome, or Opera string"},
+    {"rule":"'inf:mobile_safari' in tags and not ('inf:valid_mobile_safari' in tags)", "tag":"inv:mobile_safari", "desc":"Mobile Safari Token string but does not include valid Mobile Safari UA"},
     {"rule":"not 'inf:valid_firefox' in tags and 'inf:firefox' in tags", "tag":"inv:filefox", "desc":"Firefox token in string but does not include valid firefox string"},
     {"rule":"'inf:mozilla_5' in tags and ('inf:msie_5.01' in tags or 'inf:msie_6' in tags or 'inf:msie_7' in tags or 'inf:msie_8' in tags)", "tag":"inv:mozilla_5_w_old_msie", "desc":"Mozilla/5.0 with IE Version less then MSIE 9"}
 ]
@@ -32,6 +33,11 @@ uarules = [
     {"re":"^Mozilla\/5\.0 \((Windows NT \d.\d(; WOW64)?|Macintosh; Intel Mac OS X \d\d_\d(_\d)?)\) AppleWebKit\/\d{3}\.\d\d \(KHTML, like Gecko\) Chrome\/\d\d\.\d\.\d\d\d\d\.\d\d?\d? Safari\/\d\d\d\.\d\d$", "tag":"inf:valid_chrome", "desc":"Valid Google Chrome UA"},
     {"re":"^Mozilla\/5\.0 \((Windows NT \d.\d(; WOW64)?|Macintosh; Intel Mac OS X \d\d_\d(_\d)?)\) AppleWebKit\/\d{3}\.\d\d(\.\d{1,2})? \(KHTML, like Gecko\) Version\/\d\.\d\.\d Safari\/\d\d\d\.\d\d(\.\d{1,2})?$", "tag":"inf:valid_safari", "desc":"Valid Safari UA"},
     {"re":"\s{2,}", "tag":"inv:extra_spaces", "desc":"Extra spaces in UA make make matching very difficult"},
+    {"re":"\(iPad; ", "tag":"inf:ipad", "desc":"iPad Token"},
+    {"re":"\(iPod; ", "tag":"inf:ipod", "desc":"iPod Token"},
+    {"re":"\(iPhone; ", "tag":"inf:iphone", "desc":"iPhone Token"},
+    {"re":"Mobile\/[^ ]+ Safari\/\d{4}\.\d{1,2}", "tag":"inf:mobile_safari", "desc":"Mobile Safari Token"},
+    {"re":"Mozilla/5.0 \(iP(od|ad|hone); CPU OS \d_\d_\d like Mac OS X\) AppleWebKit\/\d{3}\.\d\d(\.\d{1,2})? \(KHTML, like Gecko\) Version\/\d\.\d Mobile\/[^ ]+ Safari\/\d{4}\.\d{1,2}$", "tag":"inf:valid_mobile_safari", "desc":"Valid Mobile Safari UA"},
     {"re":"^Mozilla\/\d\.\d ", "neg":1, "tag":"inv:no_mozilla", "desc":"Doesn't start with Mozilla"},
     {"re":"^SchwabMobile\/\d", "tag":"inf:schwabmobile", "desc":"Schwabmobile Apps"},
     {"re":"^SchwabMobileForAndroid\/\d", "tag":"inf:schwabmobile_android", "desc":"Schwabmobile For Android app"},
@@ -113,7 +119,7 @@ uarules = [
 # If enable Commonality is enabled, it makes the connection for use for checking UAs
 if enableCommonality == 1:
     import pymongo
-    mongoserver = '172.21.250.17'
+    mongoserver = '%urmongo%'
     mongoport = 27017
     mongo = pymongo.Connection(mongoserver, mongoport)
     mongo_db = mongo['useragent']
@@ -233,7 +239,7 @@ def main():
         'Mozilla/5.0 (Windows NT 5.1; rv:26.0) Gecko/20100101 Firefox/26.0',
         'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0'
     ]
-
+    testuas = ['Mozilla/5.0 (iPad; CPU OS 7_0_4 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B554a Safari/9537.53']
 
 # hacky ability to determine only what you want to print for testing.
 
@@ -282,7 +288,7 @@ def main():
 
 ### Pretty output for testing. Of course, this file can be included and you can use the output of the tagUserAgent as a list of tags programatically
         if p == 1:
-            prettyPrint(ua, '2014-02-18', tags)         
+            prettyPrint(ua, '2014-02-15', tags)         
 
 #################################################################################
 # prettyPrint(ua, day, tags)
