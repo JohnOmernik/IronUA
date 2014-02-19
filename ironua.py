@@ -113,7 +113,7 @@ uarules = [
 # If enable Commonality is enabled, it makes the connection for use for checking UAs
 if enableCommonality == 1:
 	import pymongo
-	mongoserver = '%yourmongoserver%'
+	mongoserver = '172.21.250.17'
 	mongoport = 27017
 	mongo = pymongo.Connection(mongoserver, mongoport)
 	mongo_db = mongo['useragent']
@@ -282,38 +282,43 @@ def main():
 
 ### Pretty output for testing. Of course, this file can be included and you can use the output of the tagUserAgent as a list of tags programatically
 		if p == 1:
-			infHead = 0
-			invHead = 0
-			print "\n--------------------\nUserAgent: %s\n" % ua
-			day = '2014-02-17'
-			common = howCommon(ua, day)
-			#common = {'status':'Not Found'}
+			prettyPrint(ua, '2014-02-18', tags)			
 
-			if common['status'] == "Found":
-				print "\tUser Agent Commonality: Found in DB for %s" % day
- 				print "\tNumber of Logons with UA: %s - Percentage of Total Logins for Day %s" % (common['total_logins'], common['total_logins_perc'])
-				print "\tNumber of Login IDs with UA: %s - Percentage of Total Login IDs for Day %s" % (common['total_loginids'], common['total_loginids_perc'])
-				print "\tNumber of Computers with UA: %s - Percentage of Total Computers for Day %s" % (common['total_computers'], common['total_computers_perc'])
-				print "\tNumber of IPs with UA: %s - Percentage of Total IPs for Day %s" % (common['total_ips'], common['total_ips_perc'])
-				print "\n"
-			else:
-				print "\tUser Agent Commonality: Not Found in DB for %s" % day
-				print "\n"
- 				
+#################################################################################
+# prettyPrint(ua, day, tags)
+# Takes a Useragent, day and tags and makes pretty output for the masses
 
-			
-			for t in tags:
-				if t.find('inf:') == 0:
-					if infHead == 0:
-						infHead = 1
-						print "\tInformational Components:"
-					print "\t\tTag: %s - %s" % (t, retDescbyTag(t))
-			for t in tags:
-				if t.find('inv:') == 0:
-					if invHead == 0:
-						invHead = 1
-						print "\n\tInvalid Components:"
-					print "\t\tTag: %s - %s" % (t, retDescbyTag(t))	
+
+def prettyPrint(ua, day, tags):
+	infHead = 0
+	invHead = 0
+	print "\n--------------------\nUserAgent: %s\n" % ua
+	day = '2014-02-18'
+	common = howCommon(ua, day)
+	#common = {'status':'Not Found'}
+	if common['status'] == "Found":
+		print "\tUser Agent Commonality: Found in DB for %s" % day
+		print "\tNumber of Logons with UA: %s - Percentage of Total Logins for Day %s" % (common['total_logins'], common['total_logins_perc'])
+		print "\tNumber of Login IDs with UA: %s - Percentage of Total Login IDs for Day %s" % (common['total_loginids'], common['total_loginids_perc'])
+		print "\tNumber of Computers with UA: %s - Percentage of Total Computers for Day %s" % (common['total_computers'], common['total_computers_perc'])
+		print "\tNumber of IPs with UA: %s - Percentage of Total IPs for Day %s" % (common['total_ips'], common['total_ips_perc'])
+		print "\n"
+	else:
+		print "\tUser Agent Commonality: Not Found in DB for %s" % day
+		print "\n"
+
+	for t in tags:
+		if t.find('inf:') == 0:
+			if infHead == 0:
+				infHead = 1
+				print "\tInformational Components:"
+			print "\t\tTag: %s - %s" % (t, retDescbyTag(t))
+	for t in tags:
+		if t.find('inv:') == 0:
+			if invHead == 0:
+				invHead = 1
+				print "\n\tInvalid Components:"
+			print "\t\tTag: %s - %s" % (t, retDescbyTag(t))	
 
 
 
