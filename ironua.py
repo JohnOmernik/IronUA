@@ -30,12 +30,13 @@ tagrules = [
 uarules = [
     {"re":"(mozilla|windows nt|msie|firefox|chrome\/|safari)", "tag":"inv:improper_case", "desc":"Tokens identified with improper casing"},
     {"re":"Windows XP", "tag":"inv:windowsxp", "desc":"Windows XP String identified"},
-    {"re":"^Mozilla\/5\.0 \((Windows NT \d.\d(; WOW64)?|Macintosh; Intel Mac OS X \d\d_\d(_\d)?)\) AppleWebKit\/\d{3}\.\d\d \(KHTML, like Gecko\) Chrome\/\d\d\.\d\.\d\d\d\d\.\d\d?\d? Safari\/\d\d\d\.\d\d$", "tag":"inf:valid_chrome", "desc":"Valid Google Chrome UA"},
+    {"re":"^Mozilla\/5\.0 \((X11; CrOS i686 \d{4}\.\d{2}(\.\d{1,2})?|Windows NT \d.\d(; WOW64)?|Macintosh; Intel Mac OS X \d\d_\d(_\d)?)\) AppleWebKit\/\d{3}\.\d\d \(KHTML, like Gecko\) Chrome\/\d\d\.\d\.\d\d\d\d\.\d\d?\d? Safari\/\d\d\d\.\d\d$", "tag":"inf:valid_chrome", "desc":"Valid Google Chrome UA"},
     {"re":"^Mozilla\/5\.0 \((Windows NT \d.\d(; WOW64)?|Macintosh; Intel Mac OS X \d\d_\d(_\d)?)\) AppleWebKit\/\d{3}\.\d\d(\.\d{1,2})? \(KHTML, like Gecko\) Version\/\d\.\d\.\d Safari\/\d\d\d\.\d\d(\.\d{1,2})?$", "tag":"inf:valid_safari", "desc":"Valid Safari UA"},
     {"re":"\s{2,}", "tag":"inv:extra_spaces", "desc":"Extra spaces in UA make make matching very difficult"},
     {"re":"\(iPad; ", "tag":"inf:ipad", "desc":"iPad Token"},
     {"re":"\(iPod; ", "tag":"inf:ipod", "desc":"iPod Token"},
     {"re":"\(iPhone; ", "tag":"inf:iphone", "desc":"iPhone Token"},
+    {"re":" CrOS ", "tag":"inf:chrome_os", "desc":"CrOS - Chrome OS Token"},
     {"re":"Mobile\/[^ ]+ Safari\/\d{4}\.\d{1,2}", "tag":"inf:mobile_safari", "desc":"Mobile Safari Token"},
     {"re":"Mozilla/5.0 \(iP(od|ad|hone); CPU OS \d_\d_\d like Mac OS X\) AppleWebKit\/\d{3}\.\d\d(\.\d{1,2})? \(KHTML, like Gecko\) Version\/\d\.\d Mobile\/[^ ]+ Safari\/\d{4}\.\d{1,2}$", "tag":"inf:valid_mobile_safari", "desc":"Valid Mobile Safari UA"},
     {"re":"^Mozilla\/\d\.\d ", "neg":1, "tag":"inv:no_mozilla", "desc":"Doesn't start with Mozilla"},
@@ -239,7 +240,7 @@ def main():
         'Mozilla/5.0 (Windows NT 5.1; rv:26.0) Gecko/20100101 Firefox/26.0',
         'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0'
     ]
-    testuas = ['Mozilla/5.0 (iPad; CPU OS 7_0_4 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11B554a Safari/9537.53']
+    testuas = ['Mozilla/5.0 (X11; CrOS i686 4319.96.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.74 Safari/537.36']
 
 # hacky ability to determine only what you want to print for testing.
 
