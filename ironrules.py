@@ -1,10 +1,18 @@
 
-
 #Rules Broken out into separate Python file with Changelog and Version Number
 
 
-rulver = "2014020v1"
+rulver = "20140424v1"
 
+
+# Change log
+# 20140424v1 - 
+#   New Tag Rules:
+#   inv:mozilla_5_w_old_trident
+#   inv:trident_4_w_newer_msie
+
+#
+# 2014020v1 - Initial ironrules creation (and bad naming of version)
  
 # Tag based rules. Rules are in "Python" syntax, basically looking for the presence or lack of presence of tags in the tags collection, and if that condition is met, add a tag.
 tagrules = [
@@ -18,11 +26,14 @@ tagrules = [
     {"rule":"'inf:msie' in tags and not ('inf:msie_5.01' in tags or 'inf:msie_5.5' in tags or 'inf:msie_6' in tags or 'inf:msie_7' in tags or 'inf:msie_8' in tags or 'inf:msie_9' in tags or 'inf:msie_10' in tags)", "tag":"inv:msie_version", "desc":"Invalid Version of MSIE Represented in MSIE Token"},
 # Invalid Mozilla Version to MSIE Version
     {"rule":"'inf:mozilla_5' in tags and ('inf:msie_5.01' in tags or 'inf:msie_6' in tags or 'inf:msie_7' in tags or 'inf:msie_8' in tags)", "tag":"inv:mozilla_5_w_old_msie", "desc":"Mozilla/5.0 with IE Version less then MSIE 9"},
+    {"rule":"'inf:mozilla_5' in tags and ('inf:trident_4_ie8' in tags)", "tag":"inv:mozilla_5_w_old_trident", "desc":"Mozilla/5.0 with Trident Version less then Trident 5.0"},
+    {"rule":"'inf:trident_4_ie8' in tags and ('inf:msie_9' in tags or 'inf:msie_10' in tags or 'inf:msie_11' in tags)", "tag":"inv:trident_4_w_newer_msie", "desc":"Trident/4.0 with MSIE newer then 8.0"},
 # Invalid Media Center to OS Representations
     {"rule":"'inf:media_center_6_0' in tags and not 'inf:windows_7' in tags", "tag":"inv:media_center_6_0", "desc":"Invalid Media Center 6.0 without Windows 7"},
     {"rule":"'inf:media_center_5_0' in tags and not 'inf:windows_vista' in tags", "tag":"inv:media_center_5_0", "desc":"Invalid Media Center 5.0 without Windows Vista"},
     {"rule":"('inf:media_center_4_0' in tags or 'inf:media_center_3_1' in tags or 'inf:media_center_3_0' in tags or 'inf:media_center_2_8' in tags or 'inf:media_center_2_7' in tags) and not 'inf:windows_xp' in tags", "tag":"inv:media_center_xp_no_xp", "desc":"Invalid Media Center 4.0 or lower without Windows XP"}
 ]
+
 
 # UA rules are regex based, if the regex matches, it appends the tag. 
 # Also, if the key neg exists, than it appends the tag if the reg DOESN'T match.
