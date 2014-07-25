@@ -1,11 +1,18 @@
-
 #Rules Broken out into separate Python file with Changelog and Version Number
 
 
-rulver = "20140424v1"
+rulver = "20140725v1"
 
 
 # Change log
+# 20140725v1 - 
+#   New Tag Rules:
+#   inv:crazy_browser
+#   inv:comet_bird
+#
+#   Updated Rules:
+#   inf:valid_firefox - Added x64 and Win64 to valid UAs
+#
 # 20140424v1 - 
 #   New Tag Rules:
 #   inv:mozilla_5_w_old_trident
@@ -57,7 +64,7 @@ uarules = [
     {"re":"^Mozilla\/5\.0 \((Windows NT \d.\d(; WOW64)?|Macintosh; Intel Mac OS X \d\d_\d(_\d)?)\) AppleWebKit\/\d{3}\.\d\d(\.\d{1,2})? \(KHTML, like Gecko\) Version\/\d\.\d\.\d Safari\/\d\d\d\.\d\d(\.\d{1,2})?$", "tag":"inf:valid_safari", "desc":"Valid Safari UA"},
     {"re":"^Mozilla/5.0 \(iP(od|ad|hone); CPU OS \d_\d_\d like Mac OS X\) AppleWebKit\/\d{3}\.\d\d(\.\d{1,2})? \(KHTML, like Gecko\) CriOS\/\d\d\.\d\d?\.\d{4}\.\d{2,3} Mobile\/[^ ]+ Safari\/\d{4}\.\d{1,2}$", "tag":"inf:valid_ios_chrome", "desc":"Valid iOS Chrome UA"},
     {"re":"^Mozilla/5.0 \(iP(od|ad|hone); CPU( iPhone)? OS \d_\d_\d like Mac OS X\) AppleWebKit\/\d{3}\.\d\d(\.\d{1,2})? \(KHTML, like Gecko\) Version\/\d\.\d Mobile\/[^ ]+ Safari\/\d{4}\.\d{1,2}(\.\d)?$", "tag":"inf:valid_mobile_safari", "desc":"Valid Mobile Safari UA"},
-    {"re":"^Mozilla\/5\.0 \((Windows NT \d.\d;( WOW64;)?|Macintosh; Intel Mac OS X \d\d\.\d;) rv:\d\d\.\d\) Gecko\/\d{8} Firefox\/\d\d\.\d", "tag":"inf:valid_firefox", "desc":"This appears to be a valid Firefox UA"},
+    {"re":"^Mozilla\/5\.0 \((Windows NT \d.\d;( WOW64;)?( Win64;)?( x64;)?|Macintosh; Intel Mac OS X \d\d\.\d;) rv:\d\d\.\d\) Gecko\/\d{8} Firefox\/\d\d\.\d", "tag":"inf:valid_firefox", "desc":"This appears to be a valid Firefox UA"},
     {"re":"^Mozilla\/5\.0 \(Windows NT \d\.\d;?( WOW64)?\) AppleWebKit\/\d{3}\.\d\d \(KHTML, like Gecko\) Chrome\/\d\d\.\d\.\d\d\d\d\.\d\d\d? Safari\/\d\d\d\.\d\d OPR\/\d\d\.\d\.\d{4}\.\d\d$", "tag":"inf:valid_new_opera", "desc":"Valid New Style Opera UA"},
 # Tokens - not bad, just good to know all inf
 ###### Apple and IOS
@@ -117,6 +124,8 @@ uarules = [
     {"re":"chromeframe\/\d\d\.\d\.\d{4}\.\d\d\d;", "tag":"inf:chromeframe", "desc":"chromeframe token exists in UA String"},
     {"re":"MRA \d\.\d \(build \d{4}\)", "tag":"inf:mail_ru_agent", "desc":"Mail.ru User Agent"},
     {"re":"GTB\d\.\d", "tag":"inf:google_tool_bar", "desc":"Google Tool Bar Token"},
+    {"re":"Crazy Browser", "tag":"inv:crazy_browser", "desc":"Crazy Browser Tag, almost always bad"},
+    {"re":"CometBird", "tag":"inv:comet_bird", "desc":"Comet Bird Tag, bad stuff normally"},
 ###### Windows Media Center Tokens
     {"re":"Media Center PC 2\.7", "tag":"inf:media_center_2_7", "desc":"Windows Media Center 2.7 Windows XP 2002"},
     {"re":"Media Center PC 2\.8", "tag":"inf:media_center_2_8", "desc":"Windows Media Center 2.8 Windows XP 2004"},
